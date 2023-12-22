@@ -12,26 +12,15 @@ import java.security.Key;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.function.Function;
 
 
 @Component
 public class JwtService {
 
-    final private static String SECRET = "3c7874818565749da0069549e454f75a8de6de2a2eb645891e55c83be679b81b";
-
-    public String extractUsername(String token) {
-        return extractClaim(token, Claims::getSubject);
-    }
-
-    public Date extractExpiration(String token) {
-        return extractClaim(token, Claims::getExpiration);
-    }
-
-    public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
-        final Claims claims = extractAllClaims(token);
-        return claimsResolver.apply(claims);
-    }
+    /**
+     * <a href="https://www.grc.com/passwords.htm">Token Website</a>
+     */
+    final private static String SECRET = "80DC002A54B59ACF5F198D0A8D644EEE992C04FFBCF947DAAA90AA7DFDDA2A05";
 
     public Claims extractAllClaims(String token) {
         return Jwts.parserBuilder().setSigningKey(getSignKey())
@@ -40,13 +29,13 @@ public class JwtService {
                 .getBody();
     }
 
-    public Boolean isTokenExpired(String token) {
-        return extractExpiration(token).before(new Date());
+    public Boolean isTokenExpired(Claims claims) {
+        return claims.getExpiration().before(new Date());
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails) {
-        final String username = extractUsername(token);
-        return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
+    public Boolean validateToken(Claims claims, UserDetails userDetails) {
+        final String username = claims.getSubject();
+        return username.equals(userDetails.getUsername()) && !isTokenExpired(claims);
     }
 
     public String generateToken(String username) {
