@@ -19,7 +19,7 @@
     </properties>
 <!--
  These are the external properties to run the test whether we need to run UTs ot ITs (default: UTs)
- Usage: mvn clean install -P it (for its)
+ Usage: mvn clean install -P it (for ITs)
  -->
     <profiles>
         <profile>
@@ -113,6 +113,7 @@
             <plugin>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <configuration>
+                    <argLine>-ea -XX:+EnableDynamicAgentLoading -Xshare:off</argLine>
                     <groups>${tests}</groups>
                 </configuration>
             </plugin>

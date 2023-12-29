@@ -31,7 +31,7 @@ public class IntegrationTest {
 	userDetails.setRoles("ADMIN,USER");
 	ResponseEntity<String> responseEntityResponseEntity = restTemplate.postForEntity("/products/addNewUser",
 		userDetails, String.class);
-		Assertions.assertEquals(responseEntityResponseEntity.getStatusCode(), HttpStatus.OK, "hii");
+	Assertions.assertEquals(responseEntityResponseEntity.getStatusCode(), HttpStatus.OK, "Status code is mismatched");
 	System.out.println("hii");
     }
 
