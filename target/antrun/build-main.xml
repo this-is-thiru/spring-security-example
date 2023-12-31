@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="maven-antrun-" default="main">
+  <target name="main">
+    <exec spawn="true" executable="cmd.exe">
+      <arg value="/c" />
+      <arg value="start-local.bat" />
+    </exec>
+  </target>
+</project>

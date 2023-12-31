@@ -1,0 +1,4 @@
+com\example\security\qa\IntegrationTest.class
+com\example\security\entity\UserDetailsEntityTest.class
+com\example\security\qa\DemoTest.class
+com\example\security\DemoApplicationTests.class
